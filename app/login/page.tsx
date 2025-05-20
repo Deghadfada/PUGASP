@@ -1,9 +1,6 @@
 "use client"
 
 import type React from "react"
-
-import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
@@ -13,7 +10,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
-  // Email validation function as specified in the architecture
+  // Email validation function
   const validateEmail = (email: string) => {
     const regex = /^[A-Z0-9._%+-]+@(student\.)?pug\.edu\.gh$/i
     return regex.test(email)
@@ -44,21 +41,18 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
-      <div className="w-full max-w-md space-y-8 px-4">
-        <div className="flex flex-col items-center">
-          <Image
-            src="/logo.png"
-            alt="Presbyterian University Ghana Logo"
-            width={120}
-            height={120}
-            priority
-            className="mb-6"
-          />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#002366]">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <div className="flex flex-col items-center mb-8">
+          <div className="w-16 h-8 bg-[#002366] rounded flex items-center justify-center mb-6">
+            <div className="w-2 h-2 bg-white rounded-full"></div>
+          </div>
+          <h1 className="text-2xl font-semibold text-center text-gray-800">Student Login</h1>
+          <p className="text-center text-gray-600 mt-1">Enter your student email to receive a verification code</p>
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
             <span className="block sm:inline">{error}</span>
           </div>
         )}
@@ -75,20 +69,9 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="student@pug.edu.gh"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#002366] focus:border-[#002366]"
+              placeholder="Enter your university email"
+              className="mt-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#002366] focus:border-[#002366]"
             />
-          </div>
-
-          <div className="text-sm text-gray-600">Enter your student email to receive a one-time login code</div>
-
-          <div className="flex items-center justify-between">
-            <Link href="/signup" className="text-sm text-[#002366] hover:text-[#DAA520]">
-              New User? Sign up
-            </Link>
-            <Link href="/forgot-password" className="text-sm text-[#002366] hover:text-[#DAA520]">
-              Need Help?
-            </Link>
           </div>
 
           <button
@@ -96,9 +79,13 @@ export default function LoginPage() {
             disabled={isLoading}
             className="w-full py-3 px-4 bg-[#002366] text-white rounded-md hover:bg-[#001845] transition-colors disabled:opacity-50"
           >
-            {isLoading ? "Sending..." : "Continue"}
+            {isLoading ? "Processing..." : "Continue"}
           </button>
         </form>
+
+        <div className="mt-6 text-center text-sm text-gray-500">
+          For technical support, please contact the IT department
+        </div>
       </div>
     </div>
   )

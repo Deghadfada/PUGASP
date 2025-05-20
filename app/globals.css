@@ -22,3 +22,8 @@ body {
   color: rgb(var(--foreground-rgb));
   background-color: white;
 }
+
+/* Custom styles for the login page */
+input::placeholder {
+  color: #a0aec0;
+}
